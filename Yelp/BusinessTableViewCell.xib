@@ -27,7 +27,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="500" text="0.07 mi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBZ-Sz-ex9">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="500" horizontalCompressionResistancePriority="751" text="0.07 mi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBZ-Sz-ex9">
                         <rect key="frame" x="325" y="8" width="41.5" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="kwC-6V-n02"/>
@@ -81,6 +81,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="VBZ-Sz-ex9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="icd-PB-Jpa" secondAttribute="trailing" constant="8" id="0zi-ZU-Y2C"/>
                     <constraint firstItem="icd-PB-Jpa" firstAttribute="leading" secondItem="vpg-8G-MBB" secondAttribute="leading" id="2kC-8U-khX"/>
                     <constraint firstItem="vpg-8G-MBB" firstAttribute="leading" secondItem="1AA-Z2-efv" secondAttribute="leading" id="3gq-Rn-qas"/>
                     <constraint firstItem="icd-PB-Jpa" firstAttribute="top" secondItem="8LZ-OY-RG2" secondAttribute="top" id="4tJ-PJ-a1f"/>
@@ -110,7 +111,7 @@
                 <outlet property="reviews" destination="s5K-o6-Nj5" id="DpK-wR-h3u"/>
                 <outlet property="stars" destination="vpg-8G-MBB" id="Vhx-d8-Hmn"/>
                 <outlet property="thumbnail" destination="8LZ-OY-RG2" id="3KO-J5-dLO"/>
-                <outlet property="title" destination="icd-PB-Jpa" id="KKD-2d-QAr"/>
+                <outlet property="titleLabel" destination="icd-PB-Jpa" id="xsa-UF-FSl"/>
             </connections>
             <point key="canvasLocation" x="590.5" y="407.5"/>
         </tableViewCell>

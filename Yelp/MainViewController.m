@@ -45,7 +45,7 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BusinessTableViewCell *tvc = [self.tableView dequeueReusableCellWithIdentifier: self.cellName forIndexPath:indexPath];
-    tvc.title = self.businesses[indexPath.row][@"name"];
+    tvc.titleLabel.text = self.businesses[indexPath.row][@"name"];
     return tvc;
 }
 
