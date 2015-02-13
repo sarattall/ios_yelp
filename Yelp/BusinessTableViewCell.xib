@@ -104,7 +104,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="address" destination="1AA-Z2-efv" id="fQy-iL-ey7"/>
-                <outlet property="description" destination="UjI-eq-rZ1" id="GIX-F0-2Gj"/>
+                <outlet property="descriptionLabel" destination="UjI-eq-rZ1" id="p3r-Au-aAH"/>
                 <outlet property="dollar" destination="LAk-Q2-vsj" id="Nod-eS-Hm5"/>
                 <outlet property="miles" destination="VBZ-Sz-ex9" id="Zgs-Ii-OF5"/>
                 <outlet property="reviews" destination="s5K-o6-Nj5" id="DpK-wR-h3u"/>

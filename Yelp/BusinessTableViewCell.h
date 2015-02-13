@@ -16,6 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *stars;
 @property (strong, nonatomic) IBOutlet UILabel *reviews;
 @property (strong, nonatomic) IBOutlet UILabel *address;
-@property (strong, nonatomic) IBOutlet UILabel *description;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @end
