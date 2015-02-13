@@ -7,8 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="134" id="KGk-i7-Jjw" customClass="BusinessTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="97" id="KGk-i7-Jjw" customClass="BusinessTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -52,8 +52,8 @@
                             <constraint firstAttribute="height" constant="20" id="v9B-B7-avm"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="460 Reviews" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5K-o6-Nj5">
-                        <rect key="frame" x="204" y="33" width="65.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="460 Reviews" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5K-o6-Nj5">
+                        <rect key="frame" x="204" y="34" width="65.5" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="1ZR-j4-2Pk"/>
                         </constraints>
@@ -102,7 +102,17 @@
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UjI-eq-rZ1" secondAttribute="bottom" constant="8" id="xjC-DY-LDe"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="590.5" y="426"/>
+            <connections>
+                <outlet property="address" destination="1AA-Z2-efv" id="fQy-iL-ey7"/>
+                <outlet property="description" destination="UjI-eq-rZ1" id="GIX-F0-2Gj"/>
+                <outlet property="dollar" destination="LAk-Q2-vsj" id="Nod-eS-Hm5"/>
+                <outlet property="miles" destination="VBZ-Sz-ex9" id="Zgs-Ii-OF5"/>
+                <outlet property="reviews" destination="s5K-o6-Nj5" id="DpK-wR-h3u"/>
+                <outlet property="stars" destination="vpg-8G-MBB" id="Vhx-d8-Hmn"/>
+                <outlet property="thumbnail" destination="8LZ-OY-RG2" id="3KO-J5-dLO"/>
+                <outlet property="title" destination="icd-PB-Jpa" id="KKD-2d-QAr"/>
+            </connections>
+            <point key="canvasLocation" x="590.5" y="407.5"/>
         </tableViewCell>
     </objects>
 </document>
