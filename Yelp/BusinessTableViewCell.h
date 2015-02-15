@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Business.h"
 
 @interface BusinessTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *thumbnail;
@@ -17,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *reviews;
 @property (strong, nonatomic) IBOutlet UILabel *address;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
+
+- (void) setBusiness: (Business *) business;
 
 @end

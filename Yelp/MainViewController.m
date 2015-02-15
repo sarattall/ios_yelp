@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "YelpClient.h"
 #import "BusinessTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "Business.h"
 
 NSString * const kYelpConsumerKey = @"uZY39nHLbLy1irQfsaPNOg";
 NSString * const kYelpConsumerSecret = @"nMdu_55OOXVYxrNt_Qy1jnY0bos";
@@ -45,7 +47,8 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BusinessTableViewCell *tvc = [self.tableView dequeueReusableCellWithIdentifier: self.cellName forIndexPath:indexPath];
-    tvc.titleLabel.text = self.businesses[indexPath.row][@"name"];
+    Business *business = self.businesses[indexPath.row];
+    [tvc setBusiness: business];
     return tvc;
 }
 
@@ -70,8 +73,8 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
                                                  accessSecret:kYelpTokenSecret];
         
         [self.client searchWithTerm:@"Thai" success:^(AFHTTPRequestOperation *operation, id response) {
-            NSLog(@"response: %@", response);
-            self.businesses = response[@"businesses"];
+            // NSLog(@"response: %@", response);
+            self.businesses = [Business businessesWithDictionaries: response[@"businesses"]];
             [self.tableView reloadData];
             NSLog(@"businesses: %@", self.businesses);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
