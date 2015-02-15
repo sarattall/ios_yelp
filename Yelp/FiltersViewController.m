@@ -22,6 +22,8 @@
 
 @implementation FiltersViewController
 
+#pragma mark View Controller Lifecycle
+
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
@@ -53,20 +55,16 @@
                                                                             action:@selector(onApplyButton)];
 }
 
-- (NSDictionary *) filters {
-    NSMutableDictionary *filters = [NSMutableDictionary dictionary];
-    
-    if (self.selectedCategories.count > 0) {
-        NSMutableArray *codes = [NSMutableArray array];
-        for (NSDictionary *category in self.selectedCategories) {
-            [codes addObject: category[@"code"]];
-        }
-        
-        NSString *categoriesFilter = [codes componentsJoinedByString: @","];
-        [filters setObject: categoriesFilter forKey: @"category_filter"];
-    }
-    
-    return filters;
+- (void) initCategories {
+    self.categories =
+    @[
+      @{@"name" : @"Thai", @"code": @"thai" },
+      @{@"name" : @"Mexican", @"code": @"mexican" },
+      @{@"name" : @"African", @"code": @"african" },
+      @{@"name" : @"American, Traditional", @"code": @"tradamerican" },
+      @{@"name" : @"Italian", @"code": @"italian" },
+      @{@"name" : @"Pizza", @"code": @"pizza" },
+      ];
 }
 
 #pragma mark Table Listeners
@@ -106,6 +104,22 @@
 
 #pragma mark Buttons
 
+- (NSDictionary *) filters {
+    NSMutableDictionary *filters = [NSMutableDictionary dictionary];
+    
+    if (self.selectedCategories.count > 0) {
+        NSMutableArray *codes = [NSMutableArray array];
+        for (NSDictionary *category in self.selectedCategories) {
+            [codes addObject: category[@"code"]];
+        }
+        
+        NSString *categoriesFilter = [codes componentsJoinedByString: @","];
+        [filters setObject: categoriesFilter forKey: @"category_filter"];
+    }
+    
+    return filters;
+}
+
 - (void) onCancelButton {
     NSLog(@"cancel button pressed");
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -116,32 +130,5 @@
     [self.delegate filtersViewController: self didChangeFilters:self.filters];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void) initCategories {
-    self.categories =
-    @[
-      @{@"name" : @"Thai", @"code": @"thai" },
-      @{@"name" : @"Mexican", @"code": @"mexican" },
-      @{@"name" : @"African", @"code": @"african" },
-      @{@"name" : @"American, Traditional", @"code": @"tradamerican" },
-      @{@"name" : @"Italian", @"code": @"italian" },
-      @{@"name" : @"Pizza", @"code": @"pizza" },
-      ];
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
