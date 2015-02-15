@@ -59,8 +59,8 @@
     SwitchCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"SwitchCell" forIndexPath:indexPath];
     
     cell.on = [self.selectedCategories containsObject: self.categories[indexPath.row]];
-    
     cell.delegate = self;
+    cell.titleLabel.text = self.categories[indexPath.row][@"name"];
     
     return cell;
 }
