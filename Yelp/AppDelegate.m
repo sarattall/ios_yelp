@@ -19,6 +19,7 @@
     MainViewController *vc = [[MainViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
     navigationController.navigationBar.translucent = NO;
+    navigationController.navigationBar.barTintColor = [UIColor redColor];
     self.window.rootViewController = navigationController;
     
     // self.window.rootViewController = [[MainViewController alloc] init];

@@ -18,13 +18,14 @@ NSString * const kYelpConsumerSecret = @"nMdu_55OOXVYxrNt_Qy1jnY0bos";
 NSString * const kYelpToken = @"c6xcH9pqfHerwQgFSiNaZCYxqoCIp8iW";
 NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 
-@interface MainViewController ()
+@interface MainViewController () <UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) YelpClient *client;
 @property (nonatomic, strong) NSArray *businesses;
 
 @property (nonatomic, strong) NSString *cellName;
+@property (nonatomic, strong) UISearchBar *searchBar;
 
 -(void) searchForBusinessesWithQuery: (NSString *)query params: (NSDictionary *)params;
 
@@ -43,6 +44,30 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
     }];
 }
 
+-(void) executeSearch: (UISearchBar *)searchBar {
+    [self searchForBusinessesWithQuery: searchBar.text params:nil];
+    [searchBar resignFirstResponder];
+}
+
+-(void) cancelSearch: (UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+-(void) searchBarDidEndEditing: (UISearchBar *)searchBar {
+    NSLog(@"search bar done editing");
+    [self executeSearch:searchBar];
+}
+
+-(void) searchBarSearchButtonClicked: (UISearchBar *)searchBar {
+    NSLog(@"search bar search button clicked");
+    [self executeSearch:searchBar];
+}
+
+-(void) searchBarCancelButtonClicked: (UISearchBar *)searchBar {
+    NSLog(@"search bar cancel button clicked");
+    [self cancelSearch:searchBar];
+}
+
 #pragma mark View Lifecycle
 
 - (void)viewDidLoad {
@@ -57,6 +82,12 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
     [self.tableView registerNib:cellNib forCellReuseIdentifier:self.cellName];
     
     self.title = @"Yelp";
+    
+    self.searchBar = [[UISearchBar alloc] init];
+    self.searchBar.showsCancelButton = YES;
+    self.searchBar.placeholder = @"Search";
+    self.searchBar.delegate = self;
+    self.navigationItem.titleView = self.searchBar;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters"
                                                                              style: UIBarButtonItemStylePlain
