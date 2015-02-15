@@ -53,6 +53,22 @@
                                                                             action:@selector(onApplyButton)];
 }
 
+- (NSDictionary *) filters {
+    NSMutableDictionary *filters = [NSMutableDictionary dictionary];
+    
+    if (self.selectedCategories.count > 0) {
+        NSMutableArray *codes = [NSMutableArray array];
+        for (NSDictionary *category in self.selectedCategories) {
+            [codes addObject: category[@"code"]];
+        }
+        
+        NSString *categoriesFilter = [codes componentsJoinedByString: @","];
+        [filters setObject: categoriesFilter forKey: @"category_filter"];
+    }
+    
+    return filters;
+}
+
 #pragma mark Table Listeners
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -26,9 +26,22 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 
 @property (nonatomic, strong) NSString *cellName;
 
+-(void) searchForBusinessesWithQuery: (NSString *)query params: (NSDictionary *)params;
+
 @end
 
 @implementation MainViewController
+
+-(void) searchForBusinessesWithQuery: (NSString *)query params: (NSDictionary *)params {
+    [self.client searchWithTerm: query params: params success:^(AFHTTPRequestOperation *operation, id response) {
+        // NSLog(@"response: %@", response);
+        self.businesses = [Business businessesWithDictionaries: response[@"businesses"]];
+        [self.tableView reloadData];
+        NSLog(@"businesses: %@", self.businesses);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error: %@", [error description]);
+    }];
+}
 
 #pragma mark View Lifecycle
 
@@ -69,7 +82,8 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 }
 
 -(void) filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
-    NSLog(@"Filters changed");
+    NSLog(@"Filters changed: %@", filters);
+    [self searchForBusinessesWithQuery:@"Restaurants" params: filters];
 }
 
 #pragma mark Table Listeners
@@ -101,14 +115,7 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
                                                   accessToken:kYelpToken
                                                  accessSecret:kYelpTokenSecret];
         
-        [self.client searchWithTerm:@"Thai" success:^(AFHTTPRequestOperation *operation, id response) {
-            // NSLog(@"response: %@", response);
-            self.businesses = [Business businessesWithDictionaries: response[@"businesses"]];
-            [self.tableView reloadData];
-            NSLog(@"businesses: %@", self.businesses);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"error: %@", [error description]);
-        }];
+        [self searchForBusinessesWithQuery: @"Restaurants" params: nil];
     }
     return self;
 }
