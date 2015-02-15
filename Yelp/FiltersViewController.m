@@ -16,6 +16,13 @@
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSMutableSet *selectedCategories;
 
+@property (nonatomic, assign) NSInteger categoriesSection;
+@property (nonatomic, assign) NSInteger distanceSection;
+@property (nonatomic, assign) NSInteger sortBySection;
+@property (nonatomic, assign) NSInteger mostPopularSection;
+
+@property (nonatomic, assign) BOOL dealsEnabled;
+
 -(void) initCategories;
 
 @end
@@ -29,6 +36,12 @@
     
     if (self) {
         self.selectedCategories = [NSMutableSet set];
+        
+        self.categoriesSection = 0;
+        self.distanceSection = 1;
+        self.sortBySection = 2;
+        self.mostPopularSection = 3;
+        
         [self initCategories];
     }
     
@@ -70,17 +83,63 @@
 #pragma mark Table Listeners
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SwitchCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"SwitchCell" forIndexPath:indexPath];
+    NSInteger section = indexPath.section;
+    if (section == self.categoriesSection) {
+        SwitchCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"SwitchCell" forIndexPath:indexPath];
+        
+        cell.on = [self.selectedCategories containsObject: self.categories[indexPath.row]];
+        cell.delegate = self;
+        cell.titleLabel.text = self.categories[indexPath.row][@"name"];
+        
+        return cell;
+        
+    } else if (section == self.sortBySection) {
+        return nil;
+    } else if (section == self.distanceSection) {
+        return nil;
+    } else if (section == self.mostPopularSection) {
+        SwitchCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"SwitchCell" forIndexPath:indexPath];
+        
+        // cell.on = [self.selectedCategories containsObject: self.categories[indexPath.row]];
+        cell.on = self.dealsEnabled;
+        cell.delegate = self;
+        cell.titleLabel.text = @"Deals";
+        return cell;
+    }
     
-    cell.on = [self.selectedCategories containsObject: self.categories[indexPath.row]];
-    cell.delegate = self;
-    cell.titleLabel.text = self.categories[indexPath.row][@"name"];
-    
-    return cell;
+    return nil;
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.categories count];
+    if (section == self.categoriesSection) {
+        return [self.categories count];
+    } else if (section == self.sortBySection) {
+        return 0;
+    } else if (section == self.distanceSection) {
+        return 0;
+    } else if (section == self.mostPopularSection) {
+        return 1;
+    }
+    
+    return 0;
+}
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == self.categoriesSection) {
+        return @"Categories";
+    } else if (section == self.sortBySection) {
+        return @"Sort by";
+    } else if (section == self.distanceSection) {
+        return @"Distance";
+    } else if (section == self.mostPopularSection) {
+        return @"Most Popular";
+    }
+    
+    return [NSString stringWithFormat: @"Section %ld", section];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,15 +150,26 @@
 #pragma mark Switch Cell
 
 - (void) switchCell:(SwitchCell *)switchCell didUpdateValue:(BOOL)value {
-    NSLog(@"Switch cell updated value");
     NSIndexPath *indexPath = [self.tableView indexPathForCell: switchCell];
+    NSInteger section = indexPath.section;
     
-    if (value) {
-        [self.selectedCategories addObject: self.categories[indexPath.row]];
-    } else {
-        [self.selectedCategories removeObject: self.categories[indexPath.row]];
+    if (section == self.categoriesSection) {
+        NSLog(@"Category Switch cell updated value");
+        if (value) {
+            [self.selectedCategories addObject: self.categories[indexPath.row]];
+        } else {
+            [self.selectedCategories removeObject: self.categories[indexPath.row]];
+        }
+        
+    } else if (section == self.sortBySection) {
+        return;
+    } else if (section == self.distanceSection) {
+        return;
+    } else if (section == self.mostPopularSection) {
+        NSLog(@"Deals toggled");
+        self.dealsEnabled = value;
+        return;
     }
-    
 }
 
 #pragma mark Buttons
@@ -115,6 +185,10 @@
         
         NSString *categoriesFilter = [codes componentsJoinedByString: @","];
         [filters setObject: categoriesFilter forKey: @"category_filter"];
+    }
+    
+    if (self.dealsEnabled) {
+        [filters setObject: @1 forKey:@"deals_filter"];
     }
     
     return filters;
