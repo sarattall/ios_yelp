@@ -11,6 +11,7 @@
 #import "BusinessTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "Business.h"
+#import "FiltersViewController.h"
 
 NSString * const kYelpConsumerKey = @"uZY39nHLbLy1irQfsaPNOg";
 NSString * const kYelpConsumerSecret = @"nMdu_55OOXVYxrNt_Qy1jnY0bos";
@@ -41,6 +42,33 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView registerNib:cellNib forCellReuseIdentifier:self.cellName];
+    
+    self.title = @"Yelp";
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters"
+                                                                             style: UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(onFilterButton)];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
+#pragma mark Filters
+
+-(void) onFilterButton {
+    NSLog(@"Filter button clicked");
+    
+    FiltersViewController *vc = [[FiltersViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController: vc];
+    
+    [self presentViewController: nvc animated:YES completion:nil];
+}
+
+-(void) filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
+    NSLog(@"Filters changed");
 }
 
 #pragma mark Table Listeners
