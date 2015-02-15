@@ -37,10 +37,10 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
     
     // Set table params.
     self.cellName = @"BusinessTableViewCell";
-    UINib *cellNib = [UINib nibWithNibName:self.cellName bundle:nil];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    UINib *cellNib = [UINib nibWithNibName:self.cellName bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:self.cellName];
     
     self.title = @"Yelp";
@@ -62,6 +62,7 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
     NSLog(@"Filter button clicked");
     
     FiltersViewController *vc = [[FiltersViewController alloc] init];
+    vc.delegate = self;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController: vc];
     
     [self presentViewController: nvc animated:YES completion:nil];
