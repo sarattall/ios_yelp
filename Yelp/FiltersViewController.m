@@ -8,6 +8,7 @@
 
 #import "FiltersViewController.h"
 #import "SwitchCell.h"
+#import "RadioCell.h"
 
 @interface FiltersViewController () <UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate>
 
@@ -54,8 +55,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    UINib *cellNib = [UINib nibWithNibName:@"SwitchCell" bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier: @"SwitchCell"];
+    [self.tableView registerNib: [UINib nibWithNibName: @"SwitchCell" bundle:nil] forCellReuseIdentifier: @"SwitchCell"];
+    [self.tableView registerNib: [UINib nibWithNibName: @"RadioCell" bundle:nil] forCellReuseIdentifier: @"RadioCell"];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
                                                                              style:UIBarButtonItemStylePlain
@@ -94,7 +95,10 @@
         return cell;
         
     } else if (section == self.sortBySection) {
-        return nil;
+        RadioCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"RadioCell" forIndexPath:indexPath];
+        cell.radioButtonTitles = @[@"A", @"B", @"C"];
+        cell.selectedButtonIndex = 1;
+        return cell;
     } else if (section == self.distanceSection) {
         return nil;
     } else if (section == self.mostPopularSection) {
@@ -118,7 +122,7 @@
     if (section == self.categoriesSection) {
         return [self.categories count];
     } else if (section == self.sortBySection) {
-        return 0;
+        return 1;
     } else if (section == self.distanceSection) {
         return 0;
     } else if (section == self.mostPopularSection) {

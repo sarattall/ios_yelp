@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="125" id="KGk-i7-Jjw" customClass="RadioCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5A-Wj-16y">
+                        <rect key="frame" x="8" y="8" width="304" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="FyZ-fR-Yhy"/>
+                        </constraints>
+                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Button" image="unchecked">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onRadioButtonSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="L6h-fE-wmW"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-I6-UVp">
+                        <rect key="frame" x="8" y="86" width="304" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="syj-Yi-8Zi"/>
+                        </constraints>
+                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Button" image="unchecked">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onRadioButtonSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VlL-PW-yY4"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqv-Xi-V5Z">
+                        <rect key="frame" x="8" y="47" width="304" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="va4-1G-Se9"/>
+                        </constraints>
+                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Button" image="unchecked">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onRadioButtonSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="e8k-e8-jP1"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="wqv-Xi-V5Z" secondAttribute="trailing" constant="8" id="9rm-N1-BKR"/>
+                    <constraint firstItem="wqv-Xi-V5Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="H8v-5O-Naw"/>
+                    <constraint firstItem="m5A-Wj-16y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="QsS-Jo-tB0"/>
+                    <constraint firstAttribute="trailing" secondItem="YSV-I6-UVp" secondAttribute="trailing" constant="8" id="aSp-D2-1by"/>
+                    <constraint firstItem="YSV-I6-UVp" firstAttribute="top" secondItem="wqv-Xi-V5Z" secondAttribute="bottom" constant="15" id="fkh-c6-jDL"/>
+                    <constraint firstItem="YSV-I6-UVp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="glf-LK-Vrb"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YSV-I6-UVp" secondAttribute="bottom" constant="8" id="hUA-pD-gxw"/>
+                    <constraint firstAttribute="trailing" secondItem="m5A-Wj-16y" secondAttribute="trailing" constant="8" id="mDi-Eb-jSu"/>
+                    <constraint firstItem="wqv-Xi-V5Z" firstAttribute="top" secondItem="m5A-Wj-16y" secondAttribute="bottom" constant="15" id="vlF-EM-k3Q"/>
+                    <constraint firstItem="m5A-Wj-16y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="yQD-6R-d4g"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="firstButton" destination="m5A-Wj-16y" id="xQG-sR-ob8"/>
+                <outlet property="secondButton" destination="wqv-Xi-V5Z" id="COR-S6-1rw"/>
+                <outlet property="thirdButton" destination="YSV-I6-UVp" id="Zir-J6-rK4"/>
+            </connections>
+            <point key="canvasLocation" x="914" y="686.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="unchecked" width="24" height="24"/>
+    </resources>
+</document>
