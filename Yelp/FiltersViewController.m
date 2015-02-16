@@ -24,6 +24,7 @@
 
 @property (nonatomic, assign) BOOL dealsEnabled;
 @property (nonatomic, assign) NSInteger sortByValue;
+@property (nonatomic, assign) NSInteger distanceIndex;
 
 -(void) initCategories;
 
@@ -99,10 +100,14 @@
         RadioCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"RadioCell" forIndexPath:indexPath];
         cell.delegate = self;
         cell.radioButtonTitles = @[@"Best Match", @"Distance", @"Highest Rated"];
-        cell.selectedButtonIndex = 1;
+        cell.selectedButtonIndex = self.sortByValue;
         return cell;
     } else if (section == self.distanceSection) {
-        return nil;
+        RadioCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"RadioCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        cell.radioButtonTitles = @[@"Auto", @"1 mile", @"5 miles"];
+        cell.selectedButtonIndex = self.sortByValue;
+        return cell;
     } else if (section == self.mostPopularSection) {
         SwitchCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"SwitchCell" forIndexPath:indexPath];
         
@@ -126,7 +131,7 @@
     } else if (section == self.sortBySection) {
         return 1;
     } else if (section == self.distanceSection) {
-        return 0;
+        return 1;
     } else if (section == self.mostPopularSection) {
         return 1;
     }
@@ -190,6 +195,7 @@
         self.sortByValue = index;
         return;
     } else if (section == self.distanceSection) {
+        self.distanceIndex = index;
         return;
     } else if (section == self.mostPopularSection) {
     }
@@ -212,6 +218,18 @@
     
     if (self.dealsEnabled) {
         [filters setObject: @1 forKey:@"deals_filter"];
+    }
+    
+    if (self.distanceIndex) {
+        NSNumber *distanceValue;
+        if (self.distanceIndex == 1) {
+            distanceValue = [NSNumber numberWithDouble: 1.0];
+        } else {
+            distanceValue = [NSNumber numberWithDouble: 5.0];
+        }
+        
+        NSNumber *radius = [NSNumber numberWithDouble: ([distanceValue doubleValue] / 0.000621371 )];
+        [filters setObject: radius forKey:@"radius_filter"];
     }
     
     [filters setObject: @(self.sortByValue) forKey: @"sort"];
