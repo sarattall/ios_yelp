@@ -39,10 +39,10 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 -(void) searchForBusinessesWithQuery: (NSString *)query params: (NSDictionary *)params {
     [SVProgressHUD show];
     [self.client searchWithTerm: query params: params success:^(AFHTTPRequestOperation *operation, id response) {
-        // NSLog(@"response: %@", response);
+        NSLog(@"response: %@", response);
         self.businesses = [Business businessesWithDictionaries: response[@"businesses"]];
         [self.tableView reloadData];
-        NSLog(@"businesses: %@", self.businesses);
+        // NSLog(@"businesses: %@", self.businesses);
         [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error: %@", [error description]);

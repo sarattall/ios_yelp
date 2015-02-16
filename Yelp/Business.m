@@ -28,9 +28,17 @@
         }
         self.categories = [catagoriesString substringFromIndex: 2];
         
-        NSString *street = [business valueForKeyPath: @"location.address"][0];
+        NSArray *address = [business valueForKeyPath: @"location.address"];
+        NSString *street = nil;
+        if ([address count] > 0) {
+            street = address[0];
+        }
         NSString *neighborhood = [business valueForKeyPath: @"location.neighborhoods"][0];
-        self.address = [NSString stringWithFormat: @"%@, %@", street, neighborhood];
+        if (street == nil) {
+            self.address = neighborhood;
+        } else {
+            self.address = [NSString stringWithFormat: @"%@, %@", street, neighborhood];
+        }
         
         float milesPerMeter = 0.000621371;
         self.distance = [business[@"distance"] integerValue] * milesPerMeter;
