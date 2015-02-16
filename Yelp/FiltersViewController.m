@@ -10,7 +10,7 @@
 #import "SwitchCell.h"
 #import "RadioCell.h"
 
-@interface FiltersViewController () <UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate>
+@interface FiltersViewController () <UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate, RadioCellDelegate>
 
 @property (nonatomic, readonly) NSDictionary *filters;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -23,6 +23,7 @@
 @property (nonatomic, assign) NSInteger mostPopularSection;
 
 @property (nonatomic, assign) BOOL dealsEnabled;
+@property (nonatomic, assign) NSInteger sortByValue;
 
 -(void) initCategories;
 
@@ -96,7 +97,8 @@
         
     } else if (section == self.sortBySection) {
         RadioCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"RadioCell" forIndexPath:indexPath];
-        cell.radioButtonTitles = @[@"A", @"B", @"C"];
+        cell.delegate = self;
+        cell.radioButtonTitles = @[@"Best Match", @"Distance", @"Highest Rated"];
         cell.selectedButtonIndex = 1;
         return cell;
     } else if (section == self.distanceSection) {
@@ -176,6 +178,23 @@
     }
 }
 
+#pragma mark Radio Cell
+
+- (void) radioCell:(RadioCell *)radioCell selectedRadioButtonIndex:(NSInteger)index {
+    // NSLog(@"Radio cell clicked at index: %ld", (long) index);
+    NSIndexPath *indexPath = [self.tableView indexPathForCell: radioCell];
+    NSInteger section = indexPath.section;
+    
+    if (section == self.categoriesSection) {
+    } else if (section == self.sortBySection) {
+        self.sortByValue = index;
+        return;
+    } else if (section == self.distanceSection) {
+        return;
+    } else if (section == self.mostPopularSection) {
+    }
+}
+
 #pragma mark Buttons
 
 - (NSDictionary *) filters {
@@ -194,6 +213,8 @@
     if (self.dealsEnabled) {
         [filters setObject: @1 forKey:@"deals_filter"];
     }
+    
+    [filters setObject: @(self.sortByValue) forKey: @"sort"];
     
     return filters;
 }

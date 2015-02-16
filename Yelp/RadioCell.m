@@ -57,27 +57,32 @@
     }
 }
 
-- (void) selectButton: (UIButton *)button {
+- (NSInteger) selectButton: (UIButton *)button {
     // button.selected = YES;
     if (button == self.firstButton) {
         self.firstButton.selected = YES;
         self.secondButton.selected = NO;
         self.thirdButton.selected = NO;
+        return 0;
     } else if (button == self.secondButton) {
         self.firstButton.selected = NO;
         self.secondButton.selected = YES;
         self.thirdButton.selected = NO;
+        return 1;
     } else if (button == self.thirdButton) {
         self.firstButton.selected = NO;
         self.secondButton.selected = NO;
         self.thirdButton.selected = YES;
+        return 2;
     } else {
         NSLog(@"radio button is a rando instance");
+        return -100;
     }
 }
 
 - (IBAction)onRadioButtonSelected:(id)sender {
     UIButton *button = sender;
-    [self selectButton: button];
+    NSInteger index = [self selectButton: button];
+    [self.delegate radioCell: self selectedRadioButtonIndex: index];
 }
 @end

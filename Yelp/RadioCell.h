@@ -9,10 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "RadioButton.h"
 
+@class RadioCell;
+
+@protocol RadioCellDelegate <NSObject>
+
+- (void) radioCell: (RadioCell *)radioCell selectedRadioButtonIndex: (NSInteger) index;
+
+@end
+
 @interface RadioCell : UITableViewCell
 
 @property (nonatomic, strong) NSArray *radioButtonTitles;
 
 @property (nonatomic, assign) NSInteger selectedButtonIndex;
+
+@property (nonatomic, weak) id<RadioCellDelegate> delegate;
 
 @end
