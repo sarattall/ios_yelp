@@ -54,6 +54,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Filters";
+    // self.navigationItem.titleView.backgroundColor = [UIColor whiteColor];
+    // UILabel *titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 100, 20)];
+    // self.navigationItem.titleView = titleLabel;
+    // titleLabel.text = @"Filters";
+    // titleLabel.backgroundColor = [UIColor whiteColor];
+    
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

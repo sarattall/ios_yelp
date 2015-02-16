@@ -12,6 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "Business.h"
 #import "FiltersViewController.h"
+#import "SVProgressHUD.h"
 
 NSString * const kYelpConsumerKey = @"uZY39nHLbLy1irQfsaPNOg";
 NSString * const kYelpConsumerSecret = @"nMdu_55OOXVYxrNt_Qy1jnY0bos";
@@ -36,13 +37,17 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 @implementation MainViewController
 
 -(void) searchForBusinessesWithQuery: (NSString *)query params: (NSDictionary *)params {
+    [SVProgressHUD show];
     [self.client searchWithTerm: query params: params success:^(AFHTTPRequestOperation *operation, id response) {
         // NSLog(@"response: %@", response);
         self.businesses = [Business businessesWithDictionaries: response[@"businesses"]];
         [self.tableView reloadData];
         NSLog(@"businesses: %@", self.businesses);
+        [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error: %@", [error description]);
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus: @"Network Error"];
     }];
 }
 
@@ -53,6 +58,7 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 }
 
 -(void) cancelSearch: (UISearchBar *)searchBar {
+    self.currentSearchTerm = nil;
     [searchBar resignFirstResponder];
 }
 
