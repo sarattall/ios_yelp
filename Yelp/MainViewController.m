@@ -27,6 +27,8 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 @property (nonatomic, strong) NSString *cellName;
 @property (nonatomic, strong) UISearchBar *searchBar;
 
+@property (nonatomic, strong) NSString *currentSearchTerm;
+
 -(void) searchForBusinessesWithQuery: (NSString *)query params: (NSDictionary *)params;
 
 @end
@@ -45,6 +47,7 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 }
 
 -(void) executeSearch: (UISearchBar *)searchBar {
+    self.currentSearchTerm = searchBar.text;
     [self searchForBusinessesWithQuery: searchBar.text params:nil];
     [searchBar resignFirstResponder];
 }
@@ -114,7 +117,12 @@ NSString * const kYelpTokenSecret = @"WYVH7YXhqrcxRrawNROKbbjR5Dw";
 
 -(void) filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
     NSLog(@"Filters changed: %@", filters);
-    [self searchForBusinessesWithQuery:@"Restaurants" params: filters];
+    NSString *searchTerm = @"Restaurants";
+    if (self.currentSearchTerm) {
+        self.searchBar.text = self.currentSearchTerm;
+        searchTerm = self.currentSearchTerm;
+    }
+    [self searchForBusinessesWithQuery: searchTerm params: filters];
 }
 
 #pragma mark Table Listeners

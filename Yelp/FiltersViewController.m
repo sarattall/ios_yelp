@@ -40,10 +40,10 @@
     if (self) {
         self.selectedCategories = [NSMutableSet set];
         
-        self.categoriesSection = 0;
+        self.mostPopularSection = 0;
         self.distanceSection = 1;
         self.sortBySection = 2;
-        self.mostPopularSection = 3;
+        self.categoriesSection = 3;
         
         [self initCategories];
     }
@@ -76,7 +76,6 @@
     @[
       @{@"name" : @"Thai", @"code": @"thai" },
       @{@"name" : @"Mexican", @"code": @"mexican" },
-      @{@"name" : @"African", @"code": @"african" },
       @{@"name" : @"American, Traditional", @"code": @"tradamerican" },
       @{@"name" : @"Italian", @"code": @"italian" },
       @{@"name" : @"Pizza", @"code": @"pizza" },
@@ -106,7 +105,7 @@
         RadioCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"RadioCell" forIndexPath:indexPath];
         cell.delegate = self;
         cell.radioButtonTitles = @[@"Auto", @"1 mile", @"5 miles"];
-        cell.selectedButtonIndex = self.sortByValue;
+        cell.selectedButtonIndex = self.distanceIndex;
         return cell;
     } else if (section == self.mostPopularSection) {
         SwitchCell *cell = [self.tableView dequeueReusableCellWithIdentifier: @"SwitchCell" forIndexPath:indexPath];
